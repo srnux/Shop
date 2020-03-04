@@ -1,8 +1,8 @@
 # Content
 
-.NET Core
-Entity Core 
-GraphQL API
+* .NET Core
+* Entity Core 
+* GraphQL API
 
 # restore packages
 
