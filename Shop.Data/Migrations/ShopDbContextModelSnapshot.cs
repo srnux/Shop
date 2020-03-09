@@ -3,73 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shop.Api.Data;
 
-namespace Shop.Api.Migrations
+namespace Shop.Data.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    [Migration("20200304094312_Initial")]
-    partial class Initial
+    partial class ShopDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Shop.Api.Data.Entities.Categories", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("MainCategoriesId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SubCategoriesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MainCategoriesId");
-
-                    b.HasIndex("SubCategoriesId");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("Shop.Api.Data.Entities.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("MainCategoriesId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SubCategoriesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MainCategoriesId");
-
-                    b.HasIndex("SubCategoriesId");
-
-                    b.ToTable("Category");
-                });
 
             modelBuilder.Entity("Shop.Api.Data.Entities.Image", b =>
                 {
@@ -94,16 +42,22 @@ namespace Shop.Api.Migrations
                     b.ToTable("Image");
                 });
 
-            modelBuilder.Entity("Shop.Api.Data.Entities.MainCategories", b =>
+            modelBuilder.Entity("Shop.Api.Data.Entities.MainCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("MainCategories");
+                    b.ToTable("MainCategory");
                 });
 
             modelBuilder.Entity("Shop.Api.Data.Entities.Multimedia", b =>
@@ -126,9 +80,6 @@ namespace Shop.Api.Migrations
                     b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CategoriesId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Currency")
                         .HasColumnType("nvarchar(max)");
 
@@ -141,14 +92,14 @@ namespace Shop.Api.Migrations
                     b.Property<string>("DisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Ean")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("ExpiryDate")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("GrossPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Gtin")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsExclusive")
                         .HasColumnType("bit");
@@ -206,23 +157,57 @@ namespace Shop.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoriesId");
-
                     b.HasIndex("MultimediaId");
 
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Shop.Api.Data.Entities.SubCategories", b =>
+            modelBuilder.Entity("Shop.Api.Data.Entities.ProductMainCategory", b =>
+                {
+                    b.Property<string>("ProductId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("MainCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "MainCategoryId");
+
+                    b.HasIndex("MainCategoryId");
+
+                    b.ToTable("ProductMainCategory");
+                });
+
+            modelBuilder.Entity("Shop.Api.Data.Entities.ProductSubCategory", b =>
+                {
+                    b.Property<string>("ProductId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("SubCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "SubCategoryId");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("ProductSubCategory");
+                });
+
+            modelBuilder.Entity("Shop.Api.Data.Entities.SubCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("SubCategories");
+                    b.ToTable("SubCategory");
                 });
 
             modelBuilder.Entity("Shop.Api.Data.Entities.Url", b =>
@@ -271,28 +256,6 @@ namespace Shop.Api.Migrations
                     b.ToTable("Video");
                 });
 
-            modelBuilder.Entity("Shop.Api.Data.Entities.Categories", b =>
-                {
-                    b.HasOne("Shop.Api.Data.Entities.MainCategories", "MainCategories")
-                        .WithMany()
-                        .HasForeignKey("MainCategoriesId");
-
-                    b.HasOne("Shop.Api.Data.Entities.SubCategories", "SubCategories")
-                        .WithMany()
-                        .HasForeignKey("SubCategoriesId");
-                });
-
-            modelBuilder.Entity("Shop.Api.Data.Entities.Category", b =>
-                {
-                    b.HasOne("Shop.Api.Data.Entities.MainCategories", null)
-                        .WithMany("MainCategory")
-                        .HasForeignKey("MainCategoriesId");
-
-                    b.HasOne("Shop.Api.Data.Entities.SubCategories", null)
-                        .WithMany("SubCategory")
-                        .HasForeignKey("SubCategoriesId");
-                });
-
             modelBuilder.Entity("Shop.Api.Data.Entities.Image", b =>
                 {
                     b.HasOne("Shop.Api.Data.Entities.Multimedia", null)
@@ -302,13 +265,39 @@ namespace Shop.Api.Migrations
 
             modelBuilder.Entity("Shop.Api.Data.Entities.Product", b =>
                 {
-                    b.HasOne("Shop.Api.Data.Entities.Categories", "Categories")
-                        .WithMany()
-                        .HasForeignKey("CategoriesId");
-
                     b.HasOne("Shop.Api.Data.Entities.Multimedia", "Multimedia")
                         .WithMany()
                         .HasForeignKey("MultimediaId");
+                });
+
+            modelBuilder.Entity("Shop.Api.Data.Entities.ProductMainCategory", b =>
+                {
+                    b.HasOne("Shop.Api.Data.Entities.MainCategory", "MainCategory")
+                        .WithMany()
+                        .HasForeignKey("MainCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Shop.Api.Data.Entities.Product", "Product")
+                        .WithMany("ProductMainCategories")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Shop.Api.Data.Entities.ProductSubCategory", b =>
+                {
+                    b.HasOne("Shop.Api.Data.Entities.Product", "Product")
+                        .WithMany("ProductSubCategories")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Shop.Api.Data.Entities.SubCategory", "SubCategory")
+                        .WithMany()
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Api.Data.Entities.Url", b =>

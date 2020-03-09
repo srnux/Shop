@@ -11,11 +11,12 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      "launchUrl": "ui/playground",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "CarvedRock.Api": {
+    "EShop.Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "ui/playground",

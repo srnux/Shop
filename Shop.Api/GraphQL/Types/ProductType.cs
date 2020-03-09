@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using GraphQL.Types;
 using Shop.Api.Data.Entities;
+using Shop.Api.Repositories;
 
 namespace Shop.Api.GraphQL.Types
 {
     public class ProductType: ObjectGraphType<Product>
     {
-        public ProductType()
+        public ProductType(MainCategoryRepository mainCategoriesRepository)
         {
             Field(t => t.Id);
             Field(t => t.DisplayName);
@@ -19,6 +20,20 @@ namespace Shop.Api.GraphQL.Types
             Field(t => t.StockLevel);
             //Field<ProductTypeEnumType>("Type", "The type of product");
 
+            Field<ListGraphType<MainCategoryType>>("MainCategories",
+                resolve: context => mainCategoriesRepository.GetMainCategoriesForProduct(context.Source.Id) );
+            //Field(x => x.ProductMainCategories, nullable: true, type:
+            //    typeof(ListGraphType<MainCategoriesType>)).Description("main categories");
+            
+            
+            //Field<PortfolioType>("portfolio",
+            //    arguments: new QueryArguments(new
+            //        QueryArgument<IntGraphType>
+            //        { Name = "id" }),
+            //    resolve: context =>
+            //        context.Source.Portfolios
+            //            .FirstOrDefault(port => port.Id ==
+            //                                    context.GetArgument<int>("id")));
         }
     }
 }

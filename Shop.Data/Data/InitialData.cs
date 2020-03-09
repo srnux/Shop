@@ -9,6 +9,24 @@ namespace Shop.Api.Data
     {
         public static void Seed(this ShopDbContext dbContext)
         {
+            if (!dbContext.MainCategory.Any())
+            {
+                dbContext.MainCategory.Add(new MainCategory() {Name = "Gesicht"});
+                dbContext.MainCategory.Add(new MainCategory() { Name = "Körper" });
+                dbContext.MainCategory.Add(new MainCategory() { Name = "Haare" });
+                dbContext.MainCategory.Add(new MainCategory() { Name = "Sonne" });
+            }
+            if (!dbContext.SubCategory.Any())
+            {
+                dbContext.SubCategory.Add(new SubCategory() { Name = "Lippenpflege" });
+                dbContext.SubCategory.Add(new SubCategory() { Name = "Rasur" });
+                dbContext.SubCategory.Add(new SubCategory() { Name = "Deo" });
+                dbContext.SubCategory.Add(new SubCategory() { Name = "Reinigung" });
+                dbContext.SubCategory.Add(new SubCategory() { Name = "Pflege" });
+            }
+
+            dbContext.SaveChanges();
+
             if (!dbContext.Products.Any())
             {
                 dbContext.Products.Add(new Product
@@ -19,7 +37,7 @@ namespace Shop.Api.Data
                         new Url { Description = "AddToCart", Path = "https://www.nivea.de/tin-shop/mini-cart?ajax_context=%2fsitecore%2fcontent%2fProducts%2fLabello%2fLabello+Lip+Care%2fLabello+Lip+Care%2fLABELLO%2fLAB+COLOUR++CARE%2f85125&pid=40059006333300001&sc_device=ajax&quantity=1\r\n" },
                         new Url { Description = "AddToFavorites", Path = "https://www.nivea.de/client/MyAccount/AddToFavourites?id=40059006333300001&sc_device=ajax"},
                     },
-                    Ean = "4005900633330",
+                    Gtin = "4005900633330",
                     Upc = "851250101100",
                     Id = "40059006333300001",
                     DisplayName = "Lips2Kiss Coral Crush",
@@ -50,12 +68,7 @@ namespace Shop.Api.Data
                     IsExclusive = false,
                     StockLevel = 38,
                     Brand = "Labello Lip Care",
-                    ShippingCosts = 3.95M,
-                    Categories = new Categories()
-                    {
-                        MainCategories = new MainCategories() { MainCategory = new List<Category>(){  new Category { Name = "Gesicht" }  } },
-                        SubCategories = new SubCategories() { SubCategory = new List<Category>() { new Category { Name = "Lippenpflege" } } }
-                    }
+                    ShippingCosts = 3.95M
                 });
 
                 dbContext.Products.Add(new Product
@@ -66,7 +79,7 @@ namespace Shop.Api.Data
                         new Url { Description = "AddToCart", Path = "https://www.nivea.de/tin-shop/mini-cart?ajax_context=%2fsitecore%2fcontent%2fProducts%2fLabello%2fLabello+Lip+Care%2fLabello+Lip+Care%2fLABELLO%2fLAB+COLOUR++CARE%2f85131&pid=40059005762790001&sc_device=ajax&quantity=1\r\n" },
                         new Url { Description = "WriteReview", Path = "https://www.nivea.de/pdp/write-review?productItem={E51F0AED-D9C0-DAC3-4842-D9F25888B590}"},
                     },
-                    Ean = "4005900576279",
+                    Gtin = "4005900576279",
                     Upc = "851310107000",
                     Id = "40059005762790001",
                     DisplayName = "Lips2Kiss POPPY RED",
@@ -101,12 +114,84 @@ namespace Shop.Api.Data
                     StockLevel = 11,
                     Brand = "Labello Lip Care",
                     ShippingCosts = 3.95M,
-                    Categories = new Categories()
-                    {
-                        MainCategories = new MainCategories() { MainCategory = new List<Category>() { new Category{Name = "Gesicht"} } },
-                        SubCategories = new SubCategories() { SubCategory = new List<Category>() { new Category { Name = "Lippenpflege"} }}
-                    }
+                    
                 });
+
+                dbContext.SaveChanges();
+
+                if (!dbContext.ProductMainCategory.Any())
+                {
+                    dbContext.ProductMainCategory.Add
+                    (
+                        new ProductMainCategory()
+                        {
+                            ProductId = "40059006333300001",
+                            MainCategoryId = dbContext.MainCategory.FirstOrDefault(p => p.Name.Equals("Gesicht")).Id
+                        }
+                    );
+                    dbContext.ProductMainCategory.Add
+                    (
+                        new ProductMainCategory()
+                        {
+                            ProductId =  "40059006333300001",
+                            MainCategoryId = dbContext.MainCategory.FirstOrDefault(p => p.Name.Equals("Sonne")).Id
+                        }
+                    );
+
+                    dbContext.ProductMainCategory.Add
+                    (
+                        new ProductMainCategory()
+                        {
+                            ProductId =  "40059005762790001",
+                            MainCategoryId = dbContext.MainCategory.FirstOrDefault(p => p.Name.Equals("Gesicht")).Id
+                        }
+                    );
+                    dbContext.ProductMainCategory.Add
+                    (
+                        new ProductMainCategory()
+                        {
+                            ProductId =  "40059005762790001",
+                            MainCategoryId = dbContext.MainCategory.FirstOrDefault(p => p.Name.Equals("Sonne")).Id
+                        }
+                    );
+                }
+
+                if (!dbContext.ProductSubCategory.Any())
+                {
+                    dbContext.ProductSubCategory.Add
+                    (
+                        new ProductSubCategory()
+                        {
+                            Product = dbContext.Products.FirstOrDefault(p => p.Id == "40059006333300001"),
+                            SubCategory = dbContext.SubCategory.FirstOrDefault(p => p.Name.Equals("Lippenpflege"))
+                        }
+                    );
+                    dbContext.ProductSubCategory.Add
+                    (
+                        new ProductSubCategory()
+                        {
+                            Product = dbContext.Products.FirstOrDefault(p => p.Id == "40059006333300001"),
+                            SubCategory = dbContext.SubCategory.FirstOrDefault(p => p.Name.Equals("Pflege"))
+                        }
+                    );
+
+                    dbContext.ProductSubCategory.Add
+                    (
+                        new ProductSubCategory()
+                        {
+                            Product = dbContext.Products.FirstOrDefault(p => p.Id == "40059005762790001"),
+                            SubCategory = dbContext.SubCategory.FirstOrDefault(p => p.Name.Equals("Lippenpflege"))
+                        }
+                    );
+                    dbContext.ProductSubCategory.Add
+                    (
+                        new ProductSubCategory()
+                        {
+                            Product = dbContext.Products.FirstOrDefault(p => p.Id == "40059005762790001"),
+                            SubCategory = dbContext.SubCategory.FirstOrDefault(p => p.Name.Equals("Pflege"))
+                        }
+                    );
+                }
 
                 dbContext.SaveChanges();
             }

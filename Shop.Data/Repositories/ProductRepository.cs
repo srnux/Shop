@@ -19,5 +19,9 @@ namespace Shop.Api.Repositories
         {
             return _dbContext.Products.ToListAsync();
         }
+        public Task<Product> GetProduct(string id)
+        {
+            return _dbContext.Products.FirstOrDefaultAsync(p=>p.Id==id);
+        }
     }
 }

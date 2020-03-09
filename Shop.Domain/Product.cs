@@ -8,7 +8,7 @@ namespace Shop.Api.Data.Entities
     public class Product
     {
         public string Id { get; set; }
-        public string Ean { get; set; }
+        public string Gtin { get; set; }
         public string Upc { get; set; }
         public List<Url> Urls { get; set; }
         public string DisplayName { get; set; }
@@ -41,7 +41,8 @@ namespace Shop.Api.Data.Entities
         [Column(TypeName = "decimal(18,2)")]
         public decimal ShippingCosts { get; set; }
         public int Rating { get; set; }
-        public Categories Categories { get; set; }
+        public IEnumerable<ProductMainCategory> ProductMainCategories { get; set; }
+        public IEnumerable<ProductSubCategory> ProductSubCategories { get; set; }
     }
 
     public class Url
@@ -71,29 +72,40 @@ namespace Shop.Api.Data.Entities
         public List<Video> Videos { get; set; }
     }
 
-    public class Category
+    public interface ICategory
+    {
+        int Id { get; set; }
+        string Name { get; set; }
+        string Description { get; set; }
+    }
+
+    public class ProductMainCategory
+    {
+        public string ProductId { get; set; }
+        public int MainCategoryId { get; set; }
+        public Product Product { get; set; }
+        public MainCategory MainCategory { get; set; }
+    }
+
+    public class ProductSubCategory
+    {
+        public string ProductId { get; set; }
+        public int SubCategoryId { get; set; }
+        public Product Product { get; set; }
+        public SubCategory SubCategory { get; set; }
+    }
+
+    public class MainCategory : ICategory
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }
 
-    public class MainCategories
+    public class SubCategory:ICategory
     {
         public int Id { get; set; }
-        public List<Category> MainCategory { get; set; }
-    }
-
-    public class SubCategories
-    {
-        public int Id { get; set; }
-        public List<Category> SubCategory { get; set; }
-    }
-
-    public class Categories
-    {
-        public int Id { get; set; }
-        public MainCategories MainCategories { get; set; }
-        public SubCategories SubCategories { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

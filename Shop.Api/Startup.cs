@@ -30,6 +30,7 @@ namespace Shop.Api
             services.AddDbContext<ShopDbContext>(options =>
                 options.UseSqlServer(_config["ConnectionStrings:Shop"]));
             services.AddScoped<ProductRepository>();
+            services.AddScoped <MainCategoryRepository>();
 
             services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
             services.AddScoped<ShopSchema>();
