@@ -1,0 +1,4 @@
+https://www.tpeczek.com/2019/05/serverless-graphql-with-azure-functions.html
+
+
+https://github.com/tpeczek/Demo.Azure.Functions.GraphQL

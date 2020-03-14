@@ -1,4 +1,6 @@
-﻿using GraphQL;
+﻿
+using GraphQL;
+using GraphQL.NewtonsoftJson;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Builder;
@@ -8,8 +10,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Api.Data;
-using Shop.Api.GraphQL;
 using Shop.Api.Repositories;
+using Shop.GraphQl.GraphQL;
+using Shop.GraphQl.GraphQL.Types;
 
 namespace Shop.Api
 {
@@ -32,12 +35,26 @@ namespace Shop.Api
             services.AddScoped<ProductRepository>();
             services.AddScoped <MainCategoryRepository>();
 
-            services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
+            //services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
             services.AddScoped<ShopSchema>();
+            services.AddScoped<ShopSchema>();
+            services.AddScoped<ShopQuery>();
+            services.AddScoped<Shop.GraphQl.GraphQL.Types.ProductType>();
+            services.AddScoped<MainCategoryType>();
 
-            services.AddGraphQL(o => { o.ExposeExceptions = false; })
-                .AddGraphTypes(ServiceLifetime.Scoped);
+            services.AddSingleton<IDocumentExecuter>(new DocumentExecuter());
+            services.AddSingleton<IDocumentWriter>(sp => new DocumentWriter());
 
+            //services.AddGraphQL(o => { o.ExposeExceptions = false; })
+            //    .AddGraphTypes(ServiceLifetime.Scoped);
+            
+            services.AddGraphQL(options =>
+                {
+                    options.EnableMetrics = true;
+                    options.ExposeExceptions = true;
+                }).AddGraphTypes(ServiceLifetime.Scoped)
+                .AddNewtonsoftJson();
+            
             services.Configure<KestrelServerOptions>(options =>
             {
                 options.AllowSynchronousIO = true;
@@ -49,6 +66,9 @@ namespace Shop.Api
         {
             app.UseGraphQL<ShopSchema>();
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+
+            app.UseStaticFiles();
+
             dbContext.Seed();
         }
     }
