@@ -19,3 +19,7 @@
 # run
 
 `dotnet run`
+
+# run function locally
+cd to Shop.Function directory
+`func host start`
