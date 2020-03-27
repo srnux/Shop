@@ -3,6 +3,7 @@
 * .NET Core
 * Entity Core 
 * GraphQL API
+* Azure Functions v3
 
 # restore packages
 
