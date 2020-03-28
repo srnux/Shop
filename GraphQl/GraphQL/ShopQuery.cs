@@ -18,7 +18,7 @@ namespace Shop.GraphQl.GraphQL
                 resolve: context =>
                 {
                     var id = context.GetArgument<string>("id");
-                    return productRepository.GetProduct(id);
+                    return productRepository.GetProduct(id);//forced to use sync version 
                 }
             );
         }
