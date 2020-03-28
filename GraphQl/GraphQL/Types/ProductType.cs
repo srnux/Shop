@@ -1,4 +1,5 @@
-﻿using GraphQL.Types;
+﻿using GraphQL.DataLoader;
+using GraphQL.Types;
 using Shop.Api.Data.Entities;
 using Shop.Api.Repositories;
 
@@ -6,7 +7,7 @@ namespace Shop.GraphQl.GraphQL.Types
 {
     public class ProductType: ObjectGraphType<Product>
     {
-        public ProductType(MainCategoryRepository mainCategoriesRepository)
+        public ProductType(MainCategoryRepository mainCategoriesRepository, IDataLoaderContextAccessor dataLoaderContextAccessor)
         {
             Field(t => t.Id);
             Field(t => t.DisplayName);
@@ -20,7 +21,13 @@ namespace Shop.GraphQl.GraphQL.Types
             //Field<ProductTypeEnumType>("Type", "The type of product");
 
             Field<ListGraphType<MainCategoryType>>("MainCategories",
-                resolve: context => mainCategoriesRepository.GetMainCategoriesForProduct(context.Source.Id) );
+                resolve: context =>
+                {
+                    var dataLoader =
+                        dataLoaderContextAccessor.Context.GetOrAddCollectionBatchLoader<string, ProductMainCategory>(
+                            "GetMainCategories", mainCategoriesRepository.GetMainCategories);
+                    return dataLoader.LoadAsync(context.Source.Id);
+                });
             //Field(x => x.ProductMainCategories, nullable: true, type:
             //    typeof(ListGraphType<MainCategoriesType>)).Description("main categories");
             

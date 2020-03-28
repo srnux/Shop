@@ -53,6 +53,7 @@ namespace Shop.Api
                     options.EnableMetrics = true;
                     options.ExposeExceptions = true;
                 }).AddGraphTypes(ServiceLifetime.Scoped)
+                .AddDataLoader()
                 .AddNewtonsoftJson();
             
             services.Configure<KestrelServerOptions>(options =>

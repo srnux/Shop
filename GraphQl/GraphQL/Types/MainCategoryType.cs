@@ -4,13 +4,12 @@ using Shop.Api.Repositories;
 
 namespace Shop.GraphQl.GraphQL.Types
 {
-    public class MainCategoryType : ObjectGraphType<MainCategory>
+    public class MainCategoryType : ObjectGraphType<ProductMainCategory>
     {
         public MainCategoryType(MainCategoryRepository mainCategoriesRepository)
         {
-            Field(t => t.Id);
-            Field(t => t.Name).Description("Category name");
-            Field(t => t.Description,nullable:true).Description("Category description");
+            Field(t => t.MainCategory.Name).Description("Category name");
+            Field(t => t.MainCategory.Description,nullable:true).Description("Category description");
         }
     }
 }

@@ -15,13 +15,14 @@ namespace Shop.Api.Repositories
             _dbContext = dbContext;
         }
 
-        public Task<List<Product>> GetAll()
+        public async Task<List<Product>> GetAll()
         {
-            return _dbContext.Products.ToListAsync();
+            return await _dbContext.Products.ToListAsync();
         }
-        public Task<Product> GetProduct(string id)
+
+        public async Task<Product> GetProduct(string id)
         {
-            return _dbContext.Products.FirstOrDefaultAsync(p=>p.Id==id);
+            return await _dbContext.Products.FirstOrDefaultAsync(p=>p.Id==id);
         }
     }
 }

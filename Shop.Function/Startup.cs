@@ -24,7 +24,6 @@ namespace Shop.Function
             builder.Services.AddDbContext<ShopDbContext>(options =>
                 options.UseSqlServer(Environment.GetEnvironmentVariable("ShopConnectionString") ));
 
-            //builder.Services.AddScoped<IDependencyResolver>(serviceProvider => new FuncDependencyResolver(serviceProvider.GetRequiredService));
             builder.Services.AddScoped<ProductRepository>();
             builder.Services.AddScoped<MainCategoryRepository>();
 
@@ -37,7 +36,8 @@ namespace Shop.Function
             builder.Services.AddScoped<MainCategoryType>();
 
             builder.Services.AddGraphQL(o => { o.ExposeExceptions = false; })
-                .AddGraphTypes(ServiceLifetime.Scoped);
+                .AddGraphTypes(ServiceLifetime.Scoped)
+                .AddDataLoader();
 
         }
 

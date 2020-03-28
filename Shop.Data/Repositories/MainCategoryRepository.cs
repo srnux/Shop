@@ -21,6 +21,14 @@ namespace Shop.Api.Repositories
             return _dbContext.MainCategory.ToListAsync();
         }
 
+        public async Task<ILookup<string, ProductMainCategory>> GetMainCategories(IEnumerable<string> productIds)
+        {
+            var mainCategories = await _dbContext.ProductMainCategory
+                .Include(p=>p.MainCategory)
+                .Where(product => productIds.Contains(product.ProductId)).ToListAsync();
+            return mainCategories.ToLookup(p=>p.ProductId);
+        }
+
         //public Task<List<MainCategory>> GetMainCategoriesForProduct(string productId)
         //{
         //    return _dbContext.ProductMainCategory
