@@ -1,14 +1,12 @@
 # Content
-**Shop.API**
-GraphQL REST API service - Query, Mutation and Subscription
-**Shop.Function**
-GraphQL Azure Functions - Query and Mutation
-**Shop.GraphQL**
-GraphQL - Shema, Query, Types
-**Shop.Data**
-Data Access Layer with Entity Core ORM
-**Shop.Domain**
-Domain classes
+Skeleton of a future shopping GraphQL service.
+
+# Projects
+* **Shop.API** - GraphQL Service
+* **Shop.Function** - GraphQL Azure Functions
+* **Shop.GraphQL** - GraphQL Library - Shema, Query, Types
+* **Shop.Data** - Data Access Layer with Entity Core ORM
+* **Shop.Domain** - Domain classes
 
 # Technology stack
 * .NET Core 3.1 LTS
@@ -17,10 +15,10 @@ Domain classes
 * Azure Functions 3.1 LTS
 
 # Live playgrounds on Azure
-REST API running on Azure App Service - Linux instance
+**REST API** running on Azure App Service - Linux instance
 https://shop-prototype.azurewebsites.net/ui/playground
 
-Azure Function 
+**Azure Function** 
 https://shopgraphqlfunction.azurewebsites.net/api/ShopGraphApiFunction
 
 # cUrl GraphQL query example
@@ -31,9 +29,11 @@ curl --location --request POST 'https://shopgraphqlfunction.azurewebsites.net/ap
 ```
 
 # Futher development 
-[] Mutations
-[] Subscription
-[] Data importer
+- [ ] Mutations for Product
+- [ ] Subcategory Repository
+- [ ] Subscription for Product
+- [ ] Product Data Importer
+
 
 # Local development
 
