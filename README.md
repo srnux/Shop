@@ -22,17 +22,18 @@ https://shop-prototype.azurewebsites.net/ui/playground
 https://shopgraphqlfunction.azurewebsites.net/api/ShopGraphApiFunction
 
 # cUrl GraphQL query example
-```cUrl
+```bash
 curl --location --request POST 'https://shopgraphqlfunction.azurewebsites.net/api/ShopGraphApiFunction' \
 --header 'Content-Type: application/json' \
 --data-raw '{"query":"query shopquery ($productId:ID!) {\r\n  firstproduct:product(id: $productId){\r\n    ...productFields\r\n    mainCategories{\r\n      name,\r\n      description\r\n    }\r\n  },\r\n  secondProduct:product(id: \"40059005762790001\"){\r\n    ...productFields\r\n    mainCategories{\r\n      name,\r\n      description\r\n    }\r\n  }\r\n} \r\nfragment productFields on ProductType {\r\n  \tid, displayName\r\n}\r\n","variables":{"productId":"40059006333300001"}}'
 ```
 
 # Futher development 
-- [ ] Mutations for Product
+- [X] Mutations for Product
 - [ ] Subcategory Repository
 - [ ] Subscription for Product
 - [ ] Product Data Importer
+- [ ] Support GraphQL in Shop.Api request body
 
 
 # Local development
