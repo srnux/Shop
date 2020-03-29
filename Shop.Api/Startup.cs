@@ -12,8 +12,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Shop.Api.Data;
 using Shop.Api.Repositories;
 using Shop.Data.Repositories;
-using Shop.GraphQl.GraphQL;
-using Shop.GraphQl.GraphQL.Types;
+using Shop.GraphQl;
+using Shop.GraphQl.Services;
+using Shop.GraphQl.Types;
+using ProductType = Shop.GraphQl.Types.ProductType;
 
 namespace Shop.Api
 {
@@ -36,26 +38,30 @@ namespace Shop.Api
             services.AddScoped<ProductRepository>();
             services.AddScoped <MainCategoryRepository>();
 
-            //services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
-            services.AddScoped<ShopSchema>();
             services.AddScoped<ShopSchema>();
             services.AddScoped<ShopQuery>();
-            services.AddScoped<Shop.GraphQl.GraphQL.Types.ProductType>();
+            services.AddScoped<ShopMutation>();
+            services.AddScoped<ShopSubscription>();
+            services.AddSingleton<ProductMessageService>();
+
+            services.AddScoped<ProductType>();
             services.AddScoped<MainCategoryType>();
+            services.AddScoped<ProductInputType>();
+            services.AddScoped<ProductAddedMessageType>();
 
             services.AddSingleton<IDocumentExecuter>(new DocumentExecuter());
             services.AddSingleton<IDocumentWriter>(sp => new DocumentWriter());
 
-            //services.AddGraphQL(o => { o.ExposeExceptions = false; })
-            //    .AddGraphTypes(ServiceLifetime.Scoped);
             
             services.AddGraphQL(options =>
                 {
                     options.EnableMetrics = true;
                     options.ExposeExceptions = true;
-                }).AddGraphTypes(ServiceLifetime.Scoped)
+                })
+                .AddGraphTypes(ServiceLifetime.Scoped)
                 .AddDataLoader()
-                .AddNewtonsoftJson();
+                .AddNewtonsoftJson()
+                .AddWebSockets();
             
             services.Configure<KestrelServerOptions>(options =>
             {
@@ -66,6 +72,8 @@ namespace Shop.Api
 
         public void Configure(IApplicationBuilder app, ShopDbContext dbContext)
         {
+            app.UseWebSockets();
+            app.UseGraphQLWebSockets<ShopSchema>("/graphql");
             app.UseGraphQL<ShopSchema>();
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
 

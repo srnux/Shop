@@ -1,9 +1,7 @@
 ﻿using GraphQL.Types;
 using Shop.Api.Data.Entities;
-using Shop.Api.Repositories;
-using Shop.Data.Repositories;
 
-namespace Shop.GraphQl.GraphQL.Types
+namespace Shop.GraphQl.Types
 {
     public class MainCategoryType : ObjectGraphType<ProductMainCategory>
     {

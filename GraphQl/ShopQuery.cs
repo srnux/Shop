@@ -1,9 +1,9 @@
 ﻿using GraphQL;
 using GraphQL.Types;
 using Shop.Api.Repositories;
-using Shop.GraphQl.GraphQL.Types;
+using Shop.GraphQl.Types;
 
-namespace Shop.GraphQl.GraphQL
+namespace Shop.GraphQl
 {
     public class ShopQuery: ObjectGraphType
     {

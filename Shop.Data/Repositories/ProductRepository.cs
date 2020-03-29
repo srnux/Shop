@@ -29,5 +29,12 @@ namespace Shop.Api.Repositories
         {
             return _dbContext.Products.SingleOrDefault(p => p.Id == id);
         }
+        
+        public async Task<Product> AddProduct(Product product)
+        {
+            _dbContext.Products.Add(product);
+            await _dbContext.SaveChangesAsync();
+            return product;
+        }
     }
 }

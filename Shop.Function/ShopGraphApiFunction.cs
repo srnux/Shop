@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Shop.Function.Infrastructure;
-using Shop.GraphQl.GraphQL;
+using Shop.GraphQl;
 
 namespace Shop.Function
 {

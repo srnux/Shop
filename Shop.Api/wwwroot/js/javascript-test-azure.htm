@@ -46,8 +46,8 @@
 		var myHeaders = new Headers();
 		myHeaders.append("Content-Type", "application/json");
 
-		var graphql = JSON.stringify({
-		  query: `query shopquery ($productId:ID!) {
+        var graphql = JSON.stringify({
+            query: `query shopquery ($productId:ID!) {
 		  firstproduct:product(id: $productId){
 			...productFields
 			mainCategories{
@@ -66,8 +66,8 @@
 		fragment productFields on ProductType {
 			id, displayName
 		}`,
-		  variables: {"productId":"40059006333300001"}
-		})
+            variables: { "productId": "40059006333300001" }
+        });
 		var requestOptions = {
 		  method: 'POST',
 		  headers: myHeaders,

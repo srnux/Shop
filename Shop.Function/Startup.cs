@@ -11,9 +11,10 @@ using Microsoft.EntityFrameworkCore;
 using Shop.Api.Data;
 using Shop.Api.Repositories;
 using Shop.Data.Repositories;
-using Shop.GraphQl.GraphQL;
-using Shop.GraphQl.GraphQL.Types;
-using ProductType = Shop.GraphQl.GraphQL.Types.ProductType;
+using Shop.GraphQl;
+using Shop.GraphQl.Services;
+using Shop.GraphQl.Types;
+using ProductType = Shop.GraphQl.Types.ProductType;
 
 [assembly: FunctionsStartup(typeof(Shop.Function.Startup))]
 namespace Shop.Function
@@ -33,13 +34,18 @@ namespace Shop.Function
             builder.Services.AddSingleton<IDocumentWriter>(sp => new DocumentWriter());
             builder.Services.AddScoped<ShopSchema>();
             builder.Services.AddScoped<ShopQuery>();
+            builder.Services.AddScoped<ShopMutation>();
+            builder.Services.AddScoped<ShopSubscription>();
+            builder.Services.AddSingleton<ProductMessageService>();
+
             builder.Services.AddScoped<ProductType>();
             builder.Services.AddScoped<MainCategoryType>();
+            builder.Services.AddScoped<ProductInputType>();
+            builder.Services.AddScoped<ProductAddedMessageType>();
 
             builder.Services.AddGraphQL(o => { o.ExposeExceptions = false; })
                 .AddGraphTypes(ServiceLifetime.Scoped)
                 .AddDataLoader();
-
         }
 
     }

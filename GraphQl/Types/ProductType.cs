@@ -1,10 +1,9 @@
 ﻿using GraphQL.DataLoader;
 using GraphQL.Types;
 using Shop.Api.Data.Entities;
-using Shop.Api.Repositories;
 using Shop.Data.Repositories;
 
-namespace Shop.GraphQl.GraphQL.Types
+namespace Shop.GraphQl.Types
 {
     public class ProductType: ObjectGraphType<Product>
     {
@@ -12,6 +11,7 @@ namespace Shop.GraphQl.GraphQL.Types
         {
             Field(t => t.Id);
             Field(t => t.DisplayName);
+            Field(t => t.Gtin);
             Field(t => t.ShortDescription).Description("The name of the product");
             Field(t => t.LongDescription);
             Field(t => t.OnlineFrom).Description("When the product was first introduced in the catalog");
