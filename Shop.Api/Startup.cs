@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Api.Data;
 using Shop.Api.Repositories;
+using Shop.Data.Repositories;
 using Shop.GraphQl.GraphQL;
 using Shop.GraphQl.GraphQL.Types;
 

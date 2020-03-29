@@ -10,6 +10,7 @@ using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Shop.Api.Data;
 using Shop.Api.Repositories;
+using Shop.Data.Repositories;
 using Shop.GraphQl.GraphQL;
 using Shop.GraphQl.GraphQL.Types;
 using ProductType = Shop.GraphQl.GraphQL.Types.ProductType;

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Shop.Api.Data;
 using Shop.Api.Data.Entities;
 
-namespace Shop.Api.Repositories
+namespace Shop.Data.Repositories
 {
     public class MainCategoryRepository
     {
