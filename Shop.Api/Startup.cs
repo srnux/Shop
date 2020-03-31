@@ -63,6 +63,8 @@ namespace Shop.Api
                 .AddNewtonsoftJson()
                 .AddWebSockets();
             
+            services.AddCors();
+
             services.Configure<KestrelServerOptions>(options =>
             {
                 options.AllowSynchronousIO = true;
@@ -72,6 +74,8 @@ namespace Shop.Api
 
         public void Configure(IApplicationBuilder app, ShopDbContext dbContext)
         {
+            app.UseCors(builder =>
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseWebSockets();
             app.UseGraphQLWebSockets<ShopSchema>("/graphql");
             app.UseGraphQL<ShopSchema>();
@@ -80,6 +84,8 @@ namespace Shop.Api
             app.UseStaticFiles();
 
             dbContext.Seed();
+
+            
         }
     }
 }

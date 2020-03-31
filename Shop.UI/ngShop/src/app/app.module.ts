@@ -8,7 +8,8 @@ import { ProductComponent } from './product/product.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import {ProductService} from './product/product.service'
+import {ProductService} from './product/product.service';
+import { GraphQLModule } from './graphql.module'
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {ProductService} from './product/product.service'
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    GraphQLModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]

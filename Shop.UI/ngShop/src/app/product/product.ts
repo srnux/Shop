@@ -10,3 +10,7 @@ export interface IProduct {
     starRating: number;
     imageUrl: string;
 }
+
+export interface IProductResponse {
+    products:Array<IProduct>
+}
