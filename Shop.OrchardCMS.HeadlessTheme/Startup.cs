@@ -1,9 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using OrchardCore.Modules;
 using OrchardCore.ResourceManagement;
 
-namespace OrchardCore.Themes.TheHeadlessTheme
+namespace ECommerceHeadlessTheme
 {
     public class Startup : StartupBase
     {

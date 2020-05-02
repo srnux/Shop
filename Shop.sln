@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\..\Users\LukaZmikicnevelingne\Downloads\OrchardSkills.OrchardCore.Headless-master\Nuget.config = ..\..\Users\LukaZmikicnevelingne\Downloads\OrchardSkills.OrchardCore.Headless-master\Nuget.config
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheHeadlessTheme", "Shop.OrchardCMS.HeadlessTheme\TheHeadlessTheme.csproj", "{723F8CCD-BACB-4B51-8B36-125B1F4D81DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceHeadlessTheme", "Shop.OrchardCMS.HeadlessTheme\ECommerceHeadlessTheme.csproj", "{723F8CCD-BACB-4B51-8B36-125B1F4D81DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

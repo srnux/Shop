@@ -1,6 +1,6 @@
 using OrchardCore.ResourceManagement;
 
-namespace OrchardCore.Themes.TheHeadlessTheme
+namespace ECommerceHeadlessTheme
 {
     public class ResourceManifest : IResourceManifestProvider
     {
@@ -9,8 +9,8 @@ namespace OrchardCore.Themes.TheHeadlessTheme
             var manifest = builder.Add();
 
             manifest
-                .DefineStyle("TheHeadlessTheme-bootstrap-oc")
-                .SetUrl("~/TheHeadlessTheme/css/bootstrap-oc.min.css", "~/TheHeadlessTheme/css/bootstrap-oc.css")
+                .DefineStyle("ECommerceHeadlessTheme-bootstrap-oc")
+                .SetUrl("~/ECommerceHeadlessTheme/css/bootstrap-oc.min.css", "~/ECommerceHeadlessTheme/css/bootstrap-oc.css")
                 .SetVersion("1.0.0");
 				
         }

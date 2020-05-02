@@ -8,6 +8,6 @@
     <PackageReference Include="OrchardCore.Logging.NLog" Version="1.0.0-rc1-12030" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shop.OrchardCMS.HeadlessTheme\TheHeadlessTheme.csproj" />
+    <ProjectReference Include="..\Shop.OrchardCMS.HeadlessTheme\ECommerceHeadlessTheme.csproj" />
   </ItemGroup>
 </Project>
