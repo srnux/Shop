@@ -11,7 +11,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Data", "Shop.Data\Shop
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Function", "Shop.Function\Shop.Function.csproj", "{A09E7FDD-158F-418B-A789-2CF442221BFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.GraphQl", "GraphQl\Shop.GraphQl.csproj", "{DCE85A30-FFA2-456D-B17E-5BB8A9095FFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.GraphQl", "GraphQl\Shop.GraphQl.csproj", "{DCE85A30-FFA2-456D-B17E-5BB8A9095FFE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.OrchardCMS", "Shop.OrchardCMS\Shop.OrchardCMS.csproj", "{7766B149-73BD-4B72-A77C-CBC5E9591F00}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9B9FE886-C4FB-4162-A873-BF0F91E0C153}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Users\LukaZmikicnevelingne\Downloads\OrchardSkills.OrchardCore.Headless-master\Nuget.config = ..\..\Users\LukaZmikicnevelingne\Downloads\OrchardSkills.OrchardCore.Headless-master\Nuget.config
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheHeadlessTheme", "Shop.OrchardCMS.HeadlessTheme\TheHeadlessTheme.csproj", "{723F8CCD-BACB-4B51-8B36-125B1F4D81DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +48,14 @@ Global
 		{DCE85A30-FFA2-456D-B17E-5BB8A9095FFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCE85A30-FFA2-456D-B17E-5BB8A9095FFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCE85A30-FFA2-456D-B17E-5BB8A9095FFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7766B149-73BD-4B72-A77C-CBC5E9591F00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7766B149-73BD-4B72-A77C-CBC5E9591F00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7766B149-73BD-4B72-A77C-CBC5E9591F00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7766B149-73BD-4B72-A77C-CBC5E9591F00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{723F8CCD-BACB-4B51-8B36-125B1F4D81DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{723F8CCD-BACB-4B51-8B36-125B1F4D81DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{723F8CCD-BACB-4B51-8B36-125B1F4D81DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{723F8CCD-BACB-4B51-8B36-125B1F4D81DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

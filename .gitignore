@@ -259,3 +259,5 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Shop.OrchardCMS/wwwroot/is-cache/
+/Shop.OrchardCMS/App_Data/Sites/
